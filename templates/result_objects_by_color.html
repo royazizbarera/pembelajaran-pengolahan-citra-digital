@@ -1,0 +1,44 @@
+{% extends "base.html" %} {% block title %}Object Detection by Color{% endblock
+%} {% block content %}
+
+<div class="container mt-5">
+  <h2 class="text-center">Hasil Deteksi Objek Berdasarkan Warna</h2>
+  <p class="text-center">Gambar Asli:</p>
+  <div class="text-center">
+    <img
+      src="{{ original_image_path }}"
+      alt="Original Image"
+      class="img-fluid"
+    />
+  </div>
+  <h3 class="mt-5">Jumlah dan Ukuran Objek Berdasarkan Warna:</h3>
+  <table class="table table-striped mt-3">
+    <thead>
+      <tr>
+        <th scope="col">Warna (BGR)</th>
+        <th scope="col">Warna</th>
+        <th scope="col">Jumlah Objek</th>
+        <th scope="col">Luas Total (Piksel)</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for color, area in color_areas.items() %}
+      <tr>
+        <td>{{ color }}</td>
+        <td>
+          {% if color == (0, 255, 0) %} Green {% elif color == (0, 0, 255) %}
+          Red {% elif color == (255, 0, 0) %} Blue {% else %} Warna Lain {%
+          endif %}
+        </td>
+        <td>{{ color_counts[color] }}</td>
+        <td>{{ area }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <div class="text-center mt-4">
+    <a href="/" class="btn btn-secondary">Kembali ke Home</a>
+  </div>
+</div>
+
+{% endblock %}
